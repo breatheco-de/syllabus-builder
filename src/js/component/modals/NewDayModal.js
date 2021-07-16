@@ -4,23 +4,12 @@ import API from "../../api";
 import Card from "../cards/card";
 
 const NewDayModal = ({ onConfirm, store, actions, index = null }) => {
-	const [profile, setProfile] = useState(store.info.profile);
-	const [academy, setAcademy] = useState(store.info.academy_author);
-	const [version, setVersion] = useState(store.info.slug && store.info.slug != "" ? store.info.version : null);
+	const [profile, setProfile] = useState(null);
+	const [academy, setAcademy] = useState(null);
+	const [version, setVersion] = useState(null);
 	const [newDay, setNewDay] = useState(false);
 	const [showDays, setShowDays] = useState(false);
 	const [selectedDays, setSelectedDays] = useState([]);
-
-	useEffect(() => {
-		if (store.info.slug && store.info.slug != "") {
-			if (store.info.version && store.info.version != "") {
-				setVersion(store.info.version);
-			}
-			if (store.info.academy && store.info.academy != "") {
-				setAcademy(store.info.academy);
-			}
-		}
-	}, [store.info]);
 
 	const shouldBeOpened = () => {
 		return academy && academy != "" && profile && profile != "";
@@ -71,7 +60,7 @@ const NewDayModal = ({ onConfirm, store, actions, index = null }) => {
 													if (e.target.value && e.target.value != "null") {
 														API.setOptions({ academy: e.target.value });
 														setAcademy(e.target.value);
-														if (profile) actions.getSyllabisVersions(e.target.value, profile);
+														if (profile) actions.getSyllabisVersions(e.target.value, profile, true);
 														else actions.fetch(["profile"]);
 													} else {
 														setAcademy(null);
@@ -97,7 +86,7 @@ const NewDayModal = ({ onConfirm, store, actions, index = null }) => {
 													onChange={e => {
 														if (academy && e.target.value && e.target.value != "null") {
 															setProfile(e.target.value);
-															actions.getSyllabisVersions(academy, e.target.value);
+															actions.getSyllabisVersions(academy, e.target.value, true);
 														} else {
 															setProfile(null);
 															setVersion(null);
@@ -131,8 +120,8 @@ const NewDayModal = ({ onConfirm, store, actions, index = null }) => {
 												<option key={0} value={"null"}>
 													Select version
 												</option>
-												{store.syllabus !== null && store.syllabus.length > 0 ? (
-													store.syllabus.map((syllabu, i) => {
+												{store.imported_syllabus !== null && store.imported_syllabus.length > 0 ? (
+													store.imported_syllabus.map((syllabu, i) => {
 														return (
 															<option key={i} value={syllabu.version}>
 																{syllabu.version}

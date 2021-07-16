@@ -15,13 +15,13 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 						store.imported_days.map(d => (
 							<div className="col-12 mb-1" key={d.id}>
 								<div className="card">
-									<div className="card-header d-flex justify-content-between">
+									<div className="card-header d-flex">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
 												<input type="checkbox" onChange={e => onChange(e, d)} />
 											</div>
 										</div>
-										<p className="p-0 mb-0">{d.label}</p>
+										<p className="p-0 ml-2">{d.label}</p>
 									</div>
 									<div className="card-body">
 										<div className="text-justify">
@@ -47,7 +47,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseOne" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseOne" + d.id}>
-															{"Key concepts"}
+															Key concepts{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d["key-concepts"] && d["key-concepts"].length}
+															</small>
 														</button>
 													</h2>
 												</div>
@@ -74,7 +77,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseTwo" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseTwo" + d.id}>
-															{"Lessons"}
+															{"Lessons"}{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d.lessons && d.lessons.length}
+															</small>
 														</button>
 													</h2>
 												</div>
@@ -101,7 +107,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseThree" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseThree" + d.id}>
-															{"Quizzes"}
+															{"Quizzes"}{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d.quizzes && d.quizzes.length}
+															</small>
 														</button>
 													</h2>
 												</div>
@@ -128,7 +137,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseFour" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseFour" + d.id}>
-															{"Replits"}
+															{"Replits"}{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d.replits && d.replits.length}
+															</small>
 														</button>
 													</h2>
 												</div>
@@ -155,7 +167,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseFive" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseFive" + d.id}>
-															{"Projects"}
+															{"Projects"}{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d.projects && d.projects.length}
+															</small>
 														</button>
 													</h2>
 												</div>
@@ -182,7 +197,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseSix" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseSix" + d.id}>
-															{"Assignments"}
+															{"Assignments"}{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d.assignments && d.assignments.length}
+															</small>
 														</button>
 													</h2>
 												</div>
@@ -209,7 +227,10 @@ const Card = ({ store, actions, setSelectedDays, selectedDays }) => {
 															data-target={"#collapseSeven" + d.id}
 															aria-expanded="true"
 															aria-controls={"collapseSeven" + d.id}>
-															{"Technologies"}
+															{"Technologies"}{" "}
+															<small className="badge badge-pill badge-secondary">
+																{d.technologies && d.technologies.length}
+															</small>
 														</button>
 													</h2>
 												</div>

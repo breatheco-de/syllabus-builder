@@ -60,7 +60,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			academies: [],
 			technologies: [],
 			report: [],
-			imported_days: []
+			imported_days: [],
+			imported_syllabus: []
 		},
 
 		actions: {
@@ -491,6 +492,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return await actions.upload({ content: data }, _store.info);
 			},
 			getApiSyllabusForNewDay: async (academy, profile, version) => {
+<<<<<<< HEAD
+				console.log(profile);
+=======
+>>>>>>> fc6aee55a75be68a8ff72c3b5f68b88a14ea8d3b
 				// ignore version, academy or profile null
 				if (
 					!version ||
@@ -528,7 +533,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				return await actions.import({ content: data });
 			},
-			getSyllabisVersions: async (academyId, courseSlug) => {
+			getSyllabisVersions: async (academyId, courseSlug, readOnly = false) => {
 				const store = getStore();
 				const actions = getActions();
 				const params = new URLSearchParams(window.location.search);
@@ -547,7 +552,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw Error("There was an error saving the syllabus");
 					}
 				}
-				setStore({ ...store, info: { ...store.info, academy_author: academyId, profile: courseSlug }, syllabus: data });
+				console.log(data);
+				if (!readOnly) setStore({ ...store, info: { ...store.info, academy_author: academyId, profile: courseSlug }, syllabus: data });
+				else setStore({ imported_syllabus: data });
 			},
 			cleanSyllabus: async ({ academy = null, profile = null }) => {
 				const store = getStore();
