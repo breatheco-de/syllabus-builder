@@ -68,7 +68,7 @@
 		"@sweetalert/with-react": "^0.1.1",
 		"@uiw/react-md-editor": "^2.1.1",
 		"bc-react-notifier": "^1.1.6",
-		"bootstrap": "^4.1.3",
+		"bootstrap": "^5.0.0",
 		"jquery": "^3.5.1",
 		"popper.js": "^1.12.9",
 		"prop-types": "^15.6.1",
