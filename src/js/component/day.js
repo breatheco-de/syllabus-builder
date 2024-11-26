@@ -140,7 +140,7 @@ const Day = ({ data, onMoveUp, onMoveDown, onDelete, onEditInstructions }) => {
 			}
 		});
 	};
-	
+
 	useEffect(() => {
 		let updated = false;
 		for (let key in data) {
@@ -163,7 +163,7 @@ const Day = ({ data, onMoveUp, onMoveDown, onDelete, onEditInstructions }) => {
 			)}
 			<div className="d-flex justify-content-between" style={{ margin: '0 0 10px 1.5rem' }}>
 				<p className="mb-0" style={{ textWrap: "nowrap", marginRight: "10px" }}>Module {_data.position}{"→"}{" "}</p>
-				<div className="d-flex flex-wrap" style={{ flexGrow: "100" }}>
+				<div className="d-flex flex-wrap" style={{ flexGrow: "100", gap: "10px" }}>
 					{typeof (_data.label) === "object" && Object.keys(_data.label).length > 0 ?
 						Object.keys(_data.label).map((translation) => (
 							<>
@@ -199,7 +199,7 @@ const Day = ({ data, onMoveUp, onMoveDown, onDelete, onEditInstructions }) => {
 						))
 						:
 						<SmartInput
-							className="transparent"
+							className="transparent border border-secondary bg-white text-dark"
 							style={{ width: "300px" }}
 							placeholder="Today's topic (very short)..."
 							maxLength={25}
@@ -207,6 +207,22 @@ const Day = ({ data, onMoveUp, onMoveDown, onDelete, onEditInstructions }) => {
 							initialValue={_data.label}
 						/>
 					}
+					<div className="d-flex">
+						<p className="m-0">module duration in days:</p>
+						<SmartInput
+							type="number"
+							step="0.5"
+							min="0.5"
+							className="transparent border border-secondary bg-white text-dark"
+							placeholder="Duration in days"
+							maxLength={25}
+							onChange={duration_in_days => {
+								const numericValue = parseFloat(duration_in_days) || 1;
+								actions.days().update(_data.id, { ..._data, duration_in_days: numericValue });
+							}}
+							initialValue={_data.duration_in_days}
+						/>
+					</div>
 				</div>
 				<div className="pointer float-right pe-2" onClick={() => onDelete(_data.id)}>
 					<i className="fas fa-trash" />
